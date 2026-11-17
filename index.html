@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang=“ru”>
+<head>
+  <meta charset=“UTF-8”>
+  <meta name=“viewport” content=“width=device-width, initial-scale=1”>
+  <title>КотКод — CatCod</title>
+
+  <script src=“https://telegram.org/js/telegram-web-app.js”></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: sans-serif;
+      color: var(—tg-theme-text-color, #222);
+      background: var(—tg-theme-bg-color, #fff);
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 10px;
+      color: var(—tg-theme-button-text-color, #fff);
+      background: var(—tg-theme-button-color, #2481cc);
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 id=“greeting”>Привет! Я КотКод 🐱</h1>
+  <p>Добро пожаловать в CatCod — моё мини-приложение.</p>
+  <p>Нажатий: <span id=“count”>0</span></p>
+  <button id=“clickButton”>Нажми меня</button>
+
+  <script>
+    const app = window.Telegram?.WebApp;
+    app?.ready();
+    app?.expand();
+
+    const firstName = app?.initDataUnsafe?.user?.first_name;
+    if (firstName) {
+      document.getElementById(“greeting”).textContent =
+        `Привет, ${firstName}! Я КотКод 🐱`;
+    }
+
+    let count = 0;
+    document.getElementById(“clickButton”).addEventListener(“click”, () => {
+      count++;
+      document.getElementById(“count”).textContent = count;
+    });
+  </script>
+</body>
+</html>
